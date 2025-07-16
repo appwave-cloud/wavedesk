@@ -162,14 +162,14 @@ export default function Login() {
 										className="text-muted-foreground text-sm"
 										htmlFor="remember"
 									>
-										Stay signed in
+										{t("staySignedIn")}
 									</Label>
 								</div>
 								<a
 									className="text-primary text-sm hover:underline"
 									href="/auth/forgot-password"
 								>
-									Forgot password?
+									{t("forgotPassword")}
 								</a>
 							</div>
 
@@ -178,12 +178,12 @@ export default function Login() {
 							</Button>
 
 							<div className="text-center text-muted-foreground text-sm">
-								Don't have an account?{" "}
+								{t("registerCta")}{" "}
 								<a
 									className="text-primary hover:underline"
 									href="/auth/register"
 								>
-									Register
+									{t("registerLink")}
 								</a>
 							</div>
 						</form>

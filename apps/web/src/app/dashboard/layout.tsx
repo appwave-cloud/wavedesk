@@ -1,47 +1,26 @@
 import type { Metadata } from "next";
-import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale } from "next-intl/server";
 import type { ReactNode } from "react";
-import { COOKIE_NAME } from "@/i18n/config";
-import AppNavigationLocaleButton from "./AppNavigationLocaleButton";
+import { TeamProvider } from "@/components/provider/team-provider";
+import { AppSidebar } from "@/components/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 type Props = {
 	children: ReactNode;
 };
 
 export const metadata: Metadata = {
-	title: "next-intl-mixed-routing (app)",
+	title: "Dashboard | WaveDesk Tickets",
+	description: "Check your tickets and manage your support requests",
+	icons: [{ rel: "icon", url: "/favicon/favicon.ico" }],
 };
 
-export default async function LocaleLayout({ children }: Props) {
-	const locale = await getLocale();
-
-	async function updateLocaleAction(data: FormData) {
-		"use server";
-
-		const store = await cookies();
-		store.set(COOKIE_NAME, data.get("locale") as string);
-
-		revalidatePath("/app");
-	}
-
+export default function LocaleLayout({ children }: Props) {
 	return (
-		<html lang={locale} suppressHydrationWarning>
-			<NextIntlClientProvider>
-				<div className="flex">
-					<div className="flex min-h-[100vh] w-[270px] shrink-0 flex-col justify-between bg-slate-100 p-8">
-						<div className="flex items-center justify-between">
-							<form action={updateLocaleAction} className="flex gap-3">
-								<AppNavigationLocaleButton locale="en" />
-								<AppNavigationLocaleButton locale="de" />
-							</form>
-						</div>
-					</div>
-					<div className="p-8">{children}</div>
-				</div>
-			</NextIntlClientProvider>
-		</html>
+		<TeamProvider>
+			<SidebarProvider>
+				<AppSidebar />
+				{children}
+			</SidebarProvider>
+		</TeamProvider>
 	);
 }

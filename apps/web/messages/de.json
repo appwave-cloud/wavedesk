@@ -1,6 +1,11 @@
 {
   "login": {
     "title": "Willkommen zurück",
-    "description": "Melde dich in deinem WaveDesk-Konto an"
+    "description": "Melde dich in deinem WaveDesk-Konto an",
+    "staySignedIn": "Eingeloggt bleiben",
+    "forgotPassword": "Passwort vergessen?",
+    "registerCta": "Noch kein Konto?",
+    "registerLink": "Registrieren",
+    "signIn": "Anmelden"
   }
 }

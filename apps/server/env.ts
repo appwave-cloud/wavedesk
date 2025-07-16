@@ -25,8 +25,8 @@ const EnvSchema = z.object({
 		"trace",
 		"silent",
 	]),
-	DATABASE_URL: z.url(),
-	CORS_ORIGIN: z.url(),
+	DATABASE_URL: z.string().url(),
+	CORS_ORIGIN: z.string().url(),
 });
 
 export type env = z.infer<typeof EnvSchema>;
