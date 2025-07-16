@@ -1,0 +1,228 @@
+model Ticket {
+  id          String          @id @default(uuid())
+  title       String
+  description String?
+  status      TicketStatus    @default(OPEN)
+  priority    TicketPriority  @default(MEDIUM)
+  categoryId  String?
+  category    TicketCategory? @relation(fields: [categoryId], references: [id])
+
+  customerId       String?
+  customer         Customer?         @relation(fields: [customerId], references: [id])
+  customerContacts CustomerContact[]
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  assignedToId String?
+  assignedTo   User?   @relation("AssignedTo", fields: [assignedToId], references: [id])
+
+  createdById String
+  createdBy   User   @relation("CreatedBy", fields: [createdById], references: [id])
+
+  activities          TicketActivity[]
+  comments            TicketComment[]
+  attachments         TicketAttachment[]
+  sourceLinkedTickets LinkedTicket[]     @relation("SourceLinkedTicket")
+  targetLinkedTickets LinkedTicket[]     @relation("TargetLinkedTicket")
+  worklogs            TicketWorklog[]
+  tasks               TicketTask[]
+
+  escalatedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("tickets")
+  @@schema("ticket")
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  ON_HOLD
+  RESOLVED
+  CLOSED
+  CANCELLED // When the ticket is cancelled by the customer
+
+  @@schema("ticket")
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+
+  @@schema("ticket")
+}
+
+model TicketCategory {
+  id   String @id @default(uuid())
+  name String
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  tickets Ticket[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ticket_categories")
+  @@schema("ticket")
+}
+
+model TicketActivity {
+  id      String             @id @default(uuid())
+  type    TicketActivityType
+  content String
+
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ticket_activities")
+  @@schema("ticket")
+}
+
+enum TicketActivityType {
+  COMMENT
+  STATUS_CHANGE
+  PRIORITY_CHANGE
+  CATEGORY_CHANGE
+  ASSIGNMENT_CHANGE
+  TICKET_CREATED
+  TICKET_UPDATED
+  TICKET_CLOSED
+  TICKET_CANCELLED
+  TICKET_RESOLVED
+  TICKET_REOPENED
+
+  @@schema("ticket")
+}
+
+model TicketComment {
+  id      String @id @default(uuid())
+  content String
+
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ticket_comments")
+  @@schema("ticket")
+}
+
+model TicketAttachment {
+  id       String @id @default(uuid())
+  fileName String
+  fileUrl  String
+  fileSize Int
+  fileType String
+
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ticket_attachments")
+  @@schema("ticket")
+}
+
+model LinkedTicket {
+  id   String           @id @default(uuid())
+  type LinkedTicketType @default(DUPLICATE_OF)
+
+  sourceTicketId String
+  sourceTicket   Ticket @relation("SourceLinkedTicket", fields: [sourceTicketId], references: [id])
+
+  targetTicketId String
+  targetTicket   Ticket @relation("TargetLinkedTicket", fields: [targetTicketId], references: [id])
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("linked_tickets")
+  @@schema("ticket")
+}
+
+enum LinkedTicketType {
+  DUPLICATE_OF
+  RELATED_TO
+  BLOCKS
+  BLOCKED_BY
+  PARENT_OF
+  CHILD_OF
+
+  @@schema("ticket")
+}
+
+model TicketWorklog {
+  id        String    @id @default(uuid())
+  content   String
+  startedAt DateTime
+  endedAt   DateTime?
+  duration  Int
+
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ticket_worklogs")
+  @@schema("ticket")
+}
+
+model TicketTask {
+  id          String  @id @default(uuid())
+  content     String
+  isCompleted Boolean @default(false)
+
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+
+  createdById String
+  createdBy   User   @relation("CreatedBy", fields: [createdById], references: [id])
+
+  assignedToId String?
+  assignedTo   User?   @relation("AssignedTo", fields: [assignedToId], references: [id])
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ticket_tasks")
+  @@schema("ticket")
+}
