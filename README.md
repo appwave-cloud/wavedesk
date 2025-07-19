@@ -1,69 +1,127 @@
-# wavedesk
+# 🌊 WaveDesk
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, Hono, TRPC, and more.
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/221683701?s=48&v=4" alt="WaveDesk Logo" width="48" height="48">
+  <h3>The Future of Ticket Management</h3>
+</div>
 
-## Features
+---
 
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - Reusable UI components
-- **Hono** - Lightweight, performant server framework
-- **tRPC** - End-to-end type-safe APIs
-- **Bun** - Runtime environment
-- **Prisma** - TypeScript-first ORM
-- **PostgreSQL** - Database engine
-- **Authentication** - Email & password authentication with Better Auth
-- **Biome** - Linting and formatting
-- **Turborepo** - Optimized monorepo build system
+## 🚀 About WaveDesk
 
-## Getting Started
+WaveDesk is a next-generation ticket system designed to revolutionize workflow management. Built with cutting-edge technology and AI integration, it provides a seamless, user-friendly experience that simplifies complex processes.
 
-First, install the dependencies:
+### ✨ Key Features
 
-```bash
-bun install
-```
-## Database Setup
+- 🤖 **AI-Powered Workflows** - Intelligent automation and smart suggestions
+- 🎨 **Modern UI/UX** - Beautiful, intuitive interface built with ShadCN
+- ⚡ **Lightning Fast** - Built on Next.js 15 for optimal performance
+- 🔐 **Secure Authentication** - Powered by Better Auth
+- 📱 **Responsive Design** - Works perfectly on all devices
+- 🎯 **User-Friendly** - Designed with simplicity in mind
 
-This project uses PostgreSQL with Prisma.
+---
 
-1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/server/.env` file with your PostgreSQL connection details.
+## 🛠️ Tech Stack
 
-3. Generate the Prisma client and push the schema:
-```bash
-bun db:push
-```
+### Frontend (`/apps/web`)
+- **Next.js 15** - React framework for production
+- **ShadCN** - Beautiful UI components
+- **tRPC** - End-to-end typesafe APIs
+- **Tailwind CSS** - Utility-first CSS framework
+- **Better Auth** - Modern authentication solution
 
+### Backend (`/apps/server`)
+- **Hono** - Fast, lightweight web framework
 
-Then, run the development server:
+---
 
-```bash
-bun dev
-```
+## 🚀 Getting Started
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
-The API is running at [http://localhost:3000](http://localhost:3000).
+### Prerequisites
+- Node.js 18+ 
+- Bun (recommended) or npm
+- Git
 
+### Installation
 
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/wavedesk-app/wavedesk.git
+   cd wavedesk
+   ```
 
-## Project Structure
+2. **Install dependencies**
+   ```bash
+   bun install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+4. **Start the development servers**
+   ```bash
+   bun dev
+   ```
+
+The application will be available at:
+- **Web App**: http://localhost:3000
+- **Server**: http://localhost:3001
+
+---
+
+## 📁 Project Structure
 
 ```
 wavedesk/
 ├── apps/
-│   ├── web/         # Frontend application (Next.js)
-│   └── server/      # Backend API (Hono, TRPC)
+│   ├── web/          # Next.js frontend application
+│   ├── server/       # Hono backend server
+│   └── docs/         # Documentation site
+├── packages/         # Shared packages
+└── README.md
 ```
 
-## Available Scripts
+---
 
-- `bun dev`: Start all applications in development mode
-- `bun build`: Build all applications
-- `bun dev:web`: Start only the web application
-- `bun dev:server`: Start only the server
-- `bun check-types`: Check TypeScript types across all apps
-- `bun db:push`: Push schema changes to database
-- `bun db:studio`: Open database studio UI
-- `bun check`: Run Biome formatting and linting
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🌟 Why WaveDesk?
+
+WaveDesk represents the future of ticket management systems. By combining modern web technologies with AI capabilities, we've created a platform that not only simplifies workflows but also anticipates user needs and provides intelligent solutions.
+
+### 🎯 Our Mission
+
+To transform how teams handle tickets and workflows by providing an intuitive, AI-powered platform that adapts to your needs rather than forcing you to adapt to it.
+
+---
+
+<div align="center">
+  <p>Made with ❤️ by the WaveDesk Team</p>
+  <p>
+    <a href="https://github.com/wavedesk-app/wavedesk/">GitHub</a> •
+    <a href="https://wavedesk.app">Website</a> •
+    <a href="https://docs.wavedesk.app">Documentation</a>
+  </p>
+</div>
